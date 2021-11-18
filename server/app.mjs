@@ -24,23 +24,23 @@ const run = async () => {
       })
         .sort(sortBy ? { [sortBy]: sort === 'asc' ? 1 : -1 } : {})
         .toArray();
-      res.send(tasks)
+      res.send(tasks);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   })
 
   app.post('/', async (req, res) => {
     const { description } = req.body;
-    const response = await db.collection('tasks').insertOne({ description, createdAt: Date.now() })
-    res.send(response)
+    const response = await db.collection('tasks').insertOne({ description, createdAt: Date.now() });
+    res.send(response);
   })
 
   app.put('/:id', async (req, res) => {
     const { description } = req.body;
     const _id = new ObjectId(req.params.id);
-    const response = await db.collection('tasks').updateOne({ _id }, { $set: { description } })
-    res.send()
+    const response = await db.collection('tasks').updateOne({ _id }, { $set: { description } });
+    res.send();
   })
 
   app.delete('/:id', async (req, res) => {
